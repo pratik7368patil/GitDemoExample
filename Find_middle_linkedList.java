@@ -13,41 +13,44 @@ class Node {
 class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("How many elements are their?");
+        //System.out.println("How many elements are their?");
         int N = sc.nextInt();
-        System.out.println("Type elements : ");
-        int val = sc.nextInt();
-        Node head = new Node(val);
+        if(N != 0) {
+            int val = sc.nextInt();
+            Node head = new Node(val);
+            Node tail = head;
 
-        for(int i=1; i<N; i++) {
-            val = sc.nextInt();
-            insert(head, val);
+            for(int i=1; i<N; i++) {
+                val = sc.nextInt();
+                tail = insert(head, tail, val);
+            }
+
+            System.out.print("This is middle element : ");
+            System.out.println(findMiddle(head, N));
+        } else {
+            System.out.println("No List!");
         }
-        
-        System.out.print("This is middle element : ");
-        System.out.println(findMiddle(head));
     }
 
-    public static void insert(Node head, int val) {
+    public static Node insert(Node head, Node tail,int val) {
         Node newNode = new Node(val);
         if(head == null) {
             head = newNode;
         } else {
-            Node temp = head;
-            while(temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = newNode;
+            tail.next = newNode;
         }
-
+        return newNode;
     }
 
-    public static int findMiddle(Node head) {
+    public static int findMiddle(Node head, int N) {
         Node slow = head;
         Node fast = head;
         while(fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
+        }
+        if(N%2 == 0) {
+            return slow.next.data;
         }
 
         return slow.data;

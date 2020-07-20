@@ -16,17 +16,25 @@ class Main {
         //System.out.println("How many elements are their?");
         int N = sc.nextInt();
         if(N != 0) {
+            int posi = N/2;
+
             int val = sc.nextInt();
             Node head = new Node(val);
             Node tail = head;
 
+            int result = 0;
+            
             for(int i=1; i<N; i++) {
                 val = sc.nextInt();
+                posi-- ;
+                if(posi == 0) {
+                    result = val;
+                }
                 tail = insert(head, tail, val);
             }
 
             System.out.print("This is middle element : ");
-            System.out.println(findMiddle(head, N));
+            System.out.println(result);
         } else {
             System.out.println("No List!");
         }
@@ -42,7 +50,7 @@ class Main {
         return newNode;
     }
 
-    public static int findMiddle(Node head, int N) {
+    /* public static int findMiddle(Node head, int N) {
         Node slow = head;
         Node fast = head;
         while(fast.next != null && fast.next.next != null) {
@@ -54,14 +62,6 @@ class Main {
         }
 
         return slow.data;
-    }
-
-    public static void printList(Node head) {
-        Node temp = head;
-        while(temp!= null) {
-            System.out.print(temp.data + " ");
-            temp = temp.next;
-        }
-    }
+    } */
 
 }
